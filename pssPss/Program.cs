@@ -10,6 +10,17 @@ namespace pssPss
 {
     class Program
     {
+        public static int getRandomFromRange(int min, int max)
+        {
+            Double nextRandomNumber = playTime.NextDouble();
+            Double adjustedRandomPlayTime = (nextRandomNumber) * (max - min);
+            int sleepTime = (int)adjustedRandomPlayTime;
+            int sleepAmount = sleepTime + (min);
+            return sleepAmount;
+        }
+
+        static Random playTime;
+
         static void Main(string[] args)
         {
             int minimumPlayMilliseconds = 2000;
@@ -21,7 +32,7 @@ namespace pssPss
                 (pssPss.settings as WMPLib.IWMPSettings).setMode("loop", true);
             string filePath = Path.GetFullPath("..\\..\\Data\\13 - Pss Pss.mp3");
             pssPss.URL = filePath;
-            Random playTime = new Random();
+            playTime = new Random();
             //set a random amount of time to play it (3-8 seconds)
             //play
             //set a random interval to have the program wait
@@ -29,22 +40,11 @@ namespace pssPss
             while(true)
             {
                 pssPss.controls.play();
-                Double nextRandomNumber = playTime.NextDouble();
-                Double adjustedRandomPlayTime = (nextRandomNumber) * (maximumPlayMilliseconds - minimumPlayMilliseconds);
-                int sleepTime = (int)adjustedRandomPlayTime;
-                int sleepAmount = sleepTime + (minimumPlayMilliseconds);
-                System.Console.WriteLine(sleepAmount);
-                Thread.Sleep(sleepAmount);
+                System.Console.WriteLine(getRandomFromRange(minimumPlayMilliseconds, maximumPlayMilliseconds));
+                Thread.Sleep(getRandomFromRange(minimumPlayMilliseconds, maximumPlayMilliseconds));
                 pssPss.controls.pause();
-                Thread.Sleep(sleepAmount);
+                Thread.Sleep(getRandomFromRange(minimumPlayMilliseconds, maximumPlayMilliseconds));
             }
-            //pssPss.controls.play();
-            //System.Console.WriteLine("*elevator music simulator*");
-            //System.Console.ReadKey();
-            //pssPss.controls.pause();
-            //System.Console.ReadKey();
-            //pssPss.controls.play();
-            //System.Console.ReadKey();
         }
         }
  }
