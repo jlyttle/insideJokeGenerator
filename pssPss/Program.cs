@@ -43,7 +43,7 @@ namespace pssPss
                 System.Console.WriteLine(getRandomFromRange(minimumPlayMilliseconds, maximumPlayMilliseconds));
                 Thread.Sleep(getRandomFromRange(minimumPlayMilliseconds, maximumPlayMilliseconds));
                 pssPss.controls.pause();
-                Thread.Sleep(getRandomFromRange(minimumPlayMilliseconds, maximumPlayMilliseconds));
+                Thread.Sleep(getRandomFromRange(minimumPause, maximumPause));
             }
         }
         }
