@@ -23,10 +23,14 @@ namespace pssPss
 
         static void Main(string[] args)
         {
-            int minimumPlayMilliseconds = 2000;
-            int minimumPause = 5000;
-            int maximumPlayMilliseconds = 4000;
-            int maximumPause = 60000;
+            Console.WriteLine("What is the smallest amount of time you want the song to play, in seconds?");
+            int minimumPlayMilliseconds = Convert.ToInt32(Console.ReadLine()) * 1000;
+            Console.WriteLine("What is the largest amount of time you want the song to play, in seconds?");
+            int maximumPlayMilliseconds = Convert.ToInt32(Console.ReadLine()) * 1000;
+            Console.WriteLine("What is the smallest amount of time you want the song to pause, in seconds?");
+            int minimumPause = Convert.ToInt32(Console.ReadLine()) * 1000;
+            Console.WriteLine("What is the largest amount of time you want the song to pause, in seconds?");
+            int maximumPause = Convert.ToInt32(Console.ReadLine()) * 1000;
             //load mp3 from disk
             WMPLib.WindowsMediaPlayer pssPss = new WMPLib.WindowsMediaPlayer();
                 (pssPss.settings as WMPLib.IWMPSettings).setMode("loop", true);
@@ -40,7 +44,7 @@ namespace pssPss
             while(true)
             {
                 pssPss.controls.play();
-                System.Console.WriteLine(getRandomFromRange(minimumPlayMilliseconds, maximumPlayMilliseconds));
+                Console.WriteLine(getRandomFromRange(minimumPlayMilliseconds, maximumPlayMilliseconds));
                 Thread.Sleep(getRandomFromRange(minimumPlayMilliseconds, maximumPlayMilliseconds));
                 pssPss.controls.pause();
                 Thread.Sleep(getRandomFromRange(minimumPause, maximumPause));
